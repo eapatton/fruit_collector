@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Fruit List</h1>
+
+{% for fruit in fruits %}
+  <div class="card">
+
+  <a href="{% url 'detail' fruit.id %}">
+    <div class="card-content">
+      <span class="card-title">{{ fruit.name }}</span>
+      <p>Breed: {{ fruit.climate }}</p>
+      <p>Description: {{ fruit.description }}</p>
+      <p> Growtime: {{ fruit.growtime }}</p>
+    </div>
+
+  </a>
+
+  </div>
+{% endfor %}
+
+{% endblock %}
