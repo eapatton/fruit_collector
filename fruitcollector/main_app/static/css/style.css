@@ -1,9 +1,16 @@
 body {
+    color: #94618E;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: #F8EEE7;
   }
-  
+
+  .card {
+    background-color: #F4DECB;
+    color: #94618E;
+  }
+
   main {
     flex: 1 0 auto;
   }
