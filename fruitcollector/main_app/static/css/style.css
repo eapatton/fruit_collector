@@ -1,20 +1,23 @@
+@import "https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap";
+
 body {
-    color: #94618E;
+    font-family: 'Playfair Display', serif;
+    color: #8EAEBD;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: #F8EEE7;
+    background-color: #30415D;
   }
 
   .card {
-    background-color: #F4DECB;
-    color: #94618E;
+    background-color: #8EAEBD;
+    color: #30415D;
   }
 
   main {
     flex: 1 0 auto;
   }
-  
+
   footer {
     padding-top: 0;
     text-align: right;
