@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% load static %}
 <h1>About the Fruit Collector</h1>
 <hr />
-<p>Hire the Fruit Collector!</p>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img class="card-img-top my-3" src="{% static "images/liz.png" %}" alt="Liz's Profile">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Elizabeth Patton</h5>
+        <p class="card-text">Elizabeth loves fruit and wants to share her passion for exotic fruits with others.</p>
+        <a href="https://www.linkedin.com/in/elizabeth-a-patton/" class="btn btn-outline-info">LinkedIn</a>
+        <a href="https://github.com/eapatton" class="btn btn-outline-info">GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
