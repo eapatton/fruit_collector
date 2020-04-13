@@ -3,13 +3,103 @@
 
 <h1>Fruit Details</h1>
 
+<div class="row">
+  <div class="col s6">
 <div class="card">
   <div class="card-content">
     <span class="card-title">{{ fruit.name }}</span>
     <p>Climate: {{ fruit.climate }}</p>
     <p>Description: {{ fruit.description }}</p>
     <p> Growtime: {{ fruit.growtime }}</p>
+      </div>
+    </div>
+  </div>
+<div class="col s6 ultramarine">
+    <form action="{% url 'add_eating' fruit.id%}" method="POST">
+      {% comment %} Cross Site Request Forgery token {% endcomment %}
+      {% csrf_token %}
+      {{ eating_form.as_p }}
+      <input type="submit" class="btn" style= "background-color: #30415D" value="Add Eating" />
+    </form>
+     <br>
+    {% if fruit.ate_for_today %}
+      <div class="card-panel  teal-text center-align">{{fruit.name}} has been eaten today</div>
+    {% else %}
+      <div class="card-panel red-text center-align">There is still {{fruit.name}} to eat</div>
+    {% endif %}
+
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Eating</th></tr>
+      </thead>
+      <tbody>
+        {% for eating in fruit.eating_set.all %}
+          <tr>
+            <td>{{eating.date}}</td>
+            <td>{{eating.get_meal_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ fruit.name }} Recipes</h3>
+    {% if fruit.recipes.count %}
+      {% for recipe in fruit.recipes.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ recipe.name }}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Recipes :(</h5>
+    {% endif %}
+  </div>
+  <!-- Available recipes will come after this line -->
+
+ <div class="col s6">
+    <h3>Available Recipes</h3>
+    {% if recipes.count %}
+      {% for recipe in recipes.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ recipe.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_recipe' fruit.id recipe.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{fruit.name}} Already Has All Recipes Available</h5>
+    {% endif %}
+  </div>
+</div>
+
+
+
+
+<script>
+  var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+   var selectEl = document.getElementById('id_meal');
+  M.FormSelect.init(selectEl);
+</script>
 {% endblock %}
